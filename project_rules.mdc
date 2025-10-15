@@ -1,0 +1,138 @@
+Flutter Project Rules (.mdc)
+0) Scope
+These rules govern architecture, code style, and file layout for this Flutter repo. They are enforceable guidelines for PR review and AI-assisted edits in Cursor.
+
+1) Architecture & Folder Structure (Feature-first, Clean-ish)
+Goal: Separate concerns by feature, keep UI and data apart, and share only stable cross-cutting utilities.
+
+lib/
+  app/
+    core/
+      widgets/            # shared widgets
+      routing/            # AppRoutes (constants), router init, nav helpers
+      helpers/            # constants , extensions , spacing
+      di/                 # get_it registrations
+      theme/              # app text style + app colors + font weight helper
+      networking/         # api constants + api service + dio factory + api result + api error mode + api error handler
+
+  features/
+    <feature>/
+      data/
+        models/
+        repos/     
+
+      presentation/
+        cubit/            # Cubit + State (Freezed not allowed)
+        widgets/
+        <feature>_screen.dart
+Import boundaries (must):
+
+presentation â��
+data â�� presentation â��
+presentation â�� data â�� (UI should import data)
+
+Cross-feature imports go only through app/core/* shared utilities.
+File naming (should):
+
+snake_case files; *_page.dart, *_widget.dart, *_cubit.dart, *_state.dart, *_usecase.dart, *_repository.dart, *_entity.dart.
+2) Api Result (useing freezed)
+Policy:
+
+Use throw/try-catch with typed Failure exceptions. No Either, no Result.
+// core/networking/api_result.dart
+
+@Freezed()
+abstract class ApiResult<T> with _$ApiResult<T> {
+  const factory ApiResult.success(T data) = Success<T>;
+  const factory ApiResult.failure(ApiErrorModel apiErrorModel) = Failure<T>;
+}
+3) State Management (Cubit)
+Rules:
+
+One Cubit per page/flow.
+do not use feezed here.
+One sealed State class per Cubit (initial|loading|success|error).
+Expose side-effects via methods; keep constructors DI-friendly.
+class HomeCubit extends Cubit<HomeState> {
+  HomeCubit(this._homeRepoImpl) : super(HomeInitial());
+  final HomeRepoImpl _homeRepoImpl;
+
+  Future<void> emitCategoriesState() async {
+    emit(HomeCategoriesLoading());
+    final categoriesResponse = await _homeRepoImpl.getCategories();
+    categoriesResponse.when(
+      success: (categories) => emit(HomeCategoriesSuccess(categories)),
+      failure: (error) =>
+          emit(HomeCategoriesError(errorMessage: error.message)),
+    );
+  }
+}
+
+4) Routing (generateRoute + constants only)
+Must:
+
+All paths live in AppRoutes constants. No route enums. No magic strings.
+// core/routing/routes.dart
+abstract final class Routes {
+  static const splash  = '/';
+  static const home    = '/home';
+  static const details = '/details/:id';
+
+  static String detailsPath(String id) => '/details/$id';
+}
+Router defined once in core/routing/app_router.dart.
+class AppRouter {
+  Route? generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case Routes.onboardingScreen:
+        return MaterialPageRoute(
+          builder: (_) => const OnboardingScreen(),
+        );
+        default:
+           return null
+    }
+  }
+}
+
+5) Constants (No magic numbers or strings)
+
+ go in core/helpers/constants.dart.
+class Constants {
+  static const String accessToken = 'accessToken';
+  static const String refreshToken = 'refreshToken';
+}
+
+Review checklist:
+
+â�� No route strings outside AppRoutes.
+â�� Prefer const constructors and final fields.
+6) Dependency Injection (get_it)
+Policy:
+
+Use plain get_it (no injectable unless explicitly added).
+Register interfaces â�� implementations; presentation requests use cases or repositories via DI.
+final getIt = GetIt.instance;
+
+void setupDi() {
+  // data
+  getIt.registerLazySingleton<HttpClient>(() => HttpClientImpl());
+
+  // <feature>
+  getIt.registerLazySingleton<ExampleRepository>(() => ExampleRepositoryImpl(getIt()));
+  getIt.registerFactory(() => ExampleCubit(getIt<GetData>()));
+}
+7) Testing
+Must:
+
+data: mock IO/http; JSON fixtures for models; mapping & error translation.
+presentation: Cubit tests for state sequences (success/typed failure).
+
+Small widgets as classes (not build methods).
+No business logic in build().
+Use sealed classes where appropriate (states).
+Avoid dynamic; prefer explicit types.
+async APIs return Future<T>; cancel long ops in dispose.
+8) Anti-Patterns (Do Not)
+❌�� UI importing data/*
+❌�� Raw strings in widgets/snackbars/dialogs
+❌�� Route strings outside AppRoutes
