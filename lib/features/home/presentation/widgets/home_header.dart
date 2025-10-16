@@ -11,6 +11,7 @@ class HomeHeader extends StatelessWidget {
         Text('Find Your Forever Pet', style: AppTextStyles.font24BlackBold),
         Spacer(),
         IconButton(
+          iconSize: 20,
           icon: const Icon(Icons.notifications_outlined, size: 24),
           onPressed: () {},
         ),

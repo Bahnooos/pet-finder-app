@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 import 'widgets/categories_section.dart';
 import 'widgets/custom_bottom_nav_bar.dart';
 import 'widgets/home_header.dart';
@@ -27,7 +26,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          padding: EdgeInsets.symmetric(horizontal: 10.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -37,7 +36,7 @@ class HomeScreen extends StatelessWidget {
               Expanded(
                 child: ListView.builder(
                   itemCount: pets.length,
-                  itemBuilder: (context, index) => PetCard(pet: pets[index]),
+                  itemBuilder: (context, index) => PetCard(petModels: pets[index]),
                 ),
               ),
             ],

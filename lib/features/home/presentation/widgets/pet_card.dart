@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pet_finder_app/core/theme/app_text_styles.dart';
+import 'package:pet_finder_app/features/home/data/models/pet_models.dart';
 
 class PetCard extends StatelessWidget {
-  final Map<String, String> pet;
-
-  const PetCard({super.key, required this.pet});
+  final PetModels petModels;
+  const PetCard({super.key, required this.petModels});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class PetCard extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
-                pet['image']!,
+                petModels.image?.url??'',
                 width: 100.w,
                 height: 100.w,
                 fit: BoxFit.cover,
@@ -33,11 +34,8 @@ class PetCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        pet['name']!,
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        petModels.name??'',
+                        style:AppTextStyles.font18BlackBold,
                       ),
                       IconButton(
                         icon: const Icon(
@@ -49,10 +47,10 @@ class PetCard extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    pet['gender']!,
-                    style: TextStyle(color: Colors.grey[600]),
+                    petModels.origin??'',
+                    style: AppTextStyles.font14DarkGrayGrayRegular,
                   ),
-                  Text(pet['age']!, style: TextStyle(color: Colors.grey[600])),
+                  Text(petModels.id??'', style: AppTextStyles.font14DarkGrayGrayRegular,),
                   Row(
                     children: [
                       const Icon(
@@ -60,11 +58,7 @@ class PetCard extends StatelessWidget {
                         color: Colors.red,
                         size: 16,
                       ),
-                      SizedBox(width: 4.w),
-                      Text(
-                        pet['distance']!,
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
+                  
                     ],
                   ),
                 ],

@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pet_finder_app/core/theme/app_colors.dart';
 
-class CategoriesSection extends StatelessWidget {
+class CategoriesSection extends StatefulWidget {
   const CategoriesSection({super.key});
 
+  @override
+  State<CategoriesSection> createState() => _CategoriesSectionState();
+}
+
+class _CategoriesSectionState extends State<CategoriesSection> {
+  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     final categories = ['All', 'Cats', 'Dogs', 'Birds', 'Fish', 'Reptiles'];
@@ -23,15 +30,20 @@ class CategoriesSection extends StatelessWidget {
             itemCount: categories.length,
             itemBuilder: (context, index) {
               return Padding(
-                padding: EdgeInsets.only(right: 10.w),
-                child: FilterChip(
-                  selected: index == 0,
-                  label: Text(categories[index]),
-                  onSelected: (bool selected) {},
-                  backgroundColor: Colors.grey[100],
-                  selectedColor: const Color(0xFF37BAA6),
-                  labelStyle: TextStyle(
-                    color: index == 0 ? Colors.white : Colors.black,
+                padding: EdgeInsets.only(right: 6.w),
+                child: GestureDetector(
+                  onTap: () => isSelected!=isSelected,
+                  child: Container(
+                    height: 35.h,
+                    width: 56.w,
+                    decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusGeometry.circular(16.r),
+                      ),
+                      color: isSelected
+                          ? AppColors.petTabBar
+                          : AppColors.searchFieldBackground,
+                    ),
                   ),
                 ),
               );
