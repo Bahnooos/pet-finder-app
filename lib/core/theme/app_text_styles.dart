@@ -10,6 +10,11 @@ class AppTextStyles {
     fontWeight: FontWeightHelper.bold,
     color: AppColors.black,
   );
+  static TextStyle font24BlackBold = TextStyle(
+    fontSize: 24.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: AppColors.black,
+  );
   static TextStyle font16LightGrayRegular = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeightHelper.regular,

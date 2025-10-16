@@ -6,4 +6,5 @@ class AppColors {
   static const Color white = Colors.white;
   static const Color black = Colors.black;
   static const Color buttonBackGround = Color(0xff44BDB6);
+  static const Color searchFieldBackground = Color(0xffF6F6F6);
 }
