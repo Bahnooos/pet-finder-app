@@ -7,12 +7,14 @@ part of 'favorite_item.dart';
 // **************************************************************************
 
 FavoriteItem _$FavoriteItemFromJson(Map<String, dynamic> json) => FavoriteItem(
-  id: (json['id'] as num).toInt(),
-  userId: json['user_id'] as String,
-  imageId: json['image_id'] as String,
+  id: (json['id'] as num?)?.toInt(),
+  userId: json['user_id'] as String?,
+  imageId: json['image_id'] as String?,
   subId: json['sub_id'] as String?,
-  createdAt: json['created_at'] as String,
-  image: FavoriteImage.fromJson(json['image'] as Map<String, dynamic>),
+  createdAt: json['created_at'] as String?,
+  image: json['image'] == null
+      ? null
+      : FavoriteImage.fromJson(json['image'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$FavoriteItemToJson(FavoriteItem instance) =>
@@ -26,7 +28,7 @@ Map<String, dynamic> _$FavoriteItemToJson(FavoriteItem instance) =>
     };
 
 FavoriteImage _$FavoriteImageFromJson(Map<String, dynamic> json) =>
-    FavoriteImage(id: json['id'] as String, url: json['url'] as String);
+    FavoriteImage(id: json['id'] as String?, url: json['url'] as String?);
 
 Map<String, dynamic> _$FavoriteImageToJson(FavoriteImage instance) =>
     <String, dynamic>{'id': instance.id, 'url': instance.url};
