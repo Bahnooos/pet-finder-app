@@ -20,6 +20,8 @@ class DioFactory {
     dio?.options.headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'x-api-key':
+          'live_Va3HPq8PB1mMVeKgg1KjAcq9UOLV7jmTY1V5u5La7ZRjEPOO7hLtZV6CjcOyvOf6',
     };
   }
 
