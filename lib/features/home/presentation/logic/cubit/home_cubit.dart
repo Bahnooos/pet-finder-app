@@ -16,7 +16,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> emitHomeStates() async {
     if (state is HomeSuccess && hasMore == false) return;
-
+      emit(HomeLoading());
     if (!hasMore) {
       page = 0;
       limit = 10;
