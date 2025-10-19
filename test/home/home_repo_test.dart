@@ -76,10 +76,19 @@ void main() {
   group('Home Cubit -', () {
     blocTest<HomeCubit, HomeState>(
       'emits [MyState] when MyEvent is added.',
-    
-      build: () => HomeCubit(homeRepo),
+      setUp: () {
+        mockClient = MockAPiService();
+        homeRepo = HomeRepo(mockClient);
+      },
+      build: () {
+        when(
+          () => mockClient.getPets(any(), any()),
+        ).thenAnswer((_) async => petsModelMock);
+
+        return HomeCubit(homeRepo);
+      },
       act: (cubit) => cubit.emitHomeStates(),
-      expect: () => [isA<HomeLoading>(), isA<HomeSuccess>()],
+      expect: () async => [isA<HomeLoading>(), isA<HomeSuccess>()],
     );
   });
 }
