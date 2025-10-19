@@ -8,7 +8,7 @@ class HomeLoading extends HomeState {}
 
 class HomeSuccess<T> extends HomeState {
   final List<PetModels> pets;
-  final Map<String, String> favoritesMap;
+  final Map<String?, String> favoritesMap;
   HomeSuccess({this.pets = const [],
     this.favoritesMap = const {},});
 }
