@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"android":{"default":{"projectId":"pet-finder-prod","appId":"1:847898941499:android:10fb6be5625e215b75641e","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"pet-finder-prod","configurations":{"android":"1:847898941499:android:10fb6be5625e215b75641e","ios":"1:847898941499:ios:eabb46eeedc2ee2b75641e"}}}}}}
