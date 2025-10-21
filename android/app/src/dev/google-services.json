@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "35944540277",
+    "project_id": "pet-finder-dev-a3759",
+    "storage_bucket": "pet-finder-dev-a3759.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35944540277:android:97a8808b22b84fe389f03c",
+        "android_client_info": {
+          "package_name": "com.example.pet_finder_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeAJwexp2VH0fG-9TMWMupWiBK_NzSLrU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35944540277:android:fe556c01caec1fca89f03c",
+        "android_client_info": {
+          "package_name": "com.example.pet_finder_app.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeAJwexp2VH0fG-9TMWMupWiBK_NzSLrU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
