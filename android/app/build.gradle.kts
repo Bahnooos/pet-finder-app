@@ -10,6 +10,24 @@ android {
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
+    flavorDimensions += "default"
+    productFlavors {
+        create("development") {
+            dimension = "default"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "Pet Finder development")
+            applicationIdSuffix = ".dev"
+        }
+        create("production") {
+            dimension = "default"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "Pet Finder production")
+        }
+        }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
