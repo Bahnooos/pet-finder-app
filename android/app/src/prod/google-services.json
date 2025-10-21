@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "847898941499",
+    "project_id": "pet-finder-prod",
+    "storage_bucket": "pet-finder-prod.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847898941499:android:10fb6be5625e215b75641e",
+        "android_client_info": {
+          "package_name": "com.example.pet_finder_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1iICVhnrP3Y-h_P-GTjMUbE6PQrQ_XYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
