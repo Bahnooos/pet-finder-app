@@ -1,0 +1,40 @@
+name: Android CI/CD with Fastlane and Firebase App Distribution
+
+on:
+  push:
+    branches: [ main, development ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+
+      - name: Set up Java (JDK)
+        uses: actions/setup-java@v4 
+        with:
+          distribution: 'temurin'
+          java-version: '17' 
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: stable
+
+      - name: Install Flutter Dependencies
+        run: flutter pub get
+
+      - name: Set up Ruby and Install Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.4.4
+          bundler-cache: true
+          working-directory: android
+
+
+      - name: Build Android APK with Fastlane
+        working-directory: android
+        run: bundle exec fastlane android firebase_distribution
