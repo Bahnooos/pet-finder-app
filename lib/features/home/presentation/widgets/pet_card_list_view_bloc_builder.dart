@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pet_finder_app/core/helpers/extensions.dart';
@@ -12,6 +13,7 @@ class PetCardListViewBlocCBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAnalytics analytics = FirebaseAnalytics.instance;
     return Expanded(
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
@@ -34,8 +36,17 @@ class PetCardListViewBlocCBuilder extends StatelessWidget {
                 );
 
                 return GestureDetector(
-                  onTap: () =>
-                      context.pushNamed(Routes.detailsScreen, arguments: pet),
+                  onTap: () async {
+                    context.pushNamed(Routes.detailsScreen, arguments: pet);
+
+                    await analytics.logEvent(
+                      name: 'button_pressed',
+                      parameters: {
+                        'button_name': 'start_game_button',
+                        'screen': 'home_screen',
+                      },
+                    );
+                  },
                   child: PetCard(
                     petModels: pet,
                     isFavorite: isFavorite, // Pass the correct boolean value

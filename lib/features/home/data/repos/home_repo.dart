@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:pet_finder_app/core/networking/api_error_handler.dart';
 import 'package:pet_finder_app/core/networking/api_result.dart';
 import 'package:pet_finder_app/core/networking/api_service.dart';
@@ -22,11 +23,17 @@ class HomeRepo {
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }
   }
+
   Future<ApiResult<List<FavoriteItem>>> getFavoriteItems() async {
     try {
       final response = await _apiService.getFavorites();
       return ApiResult.success(response);
-    } catch (error) {
+    } catch (error, stack) {
+      FirebaseCrashlytics.instance.recordError(
+        error,
+        stack,
+        reason: 'failed to fetch data from APi in get favorites items',
+      );
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }
   }
@@ -41,6 +48,7 @@ class HomeRepo {
       return ApiResult.failure(ApiErrorHandler.handle(e));
     }
   }
+
   Future<ApiResult<void>> deleteFavorite(String favoriteId) async {
     try {
       // The API call returns nothing on success, so we use ApiResult<void>
