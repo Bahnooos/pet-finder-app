@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.63"
+  adjust_sdk:
+    dependency: "direct main"
+    description:
+      name: adjust_sdk
+      sha256: "557dfee4da57ce38f7ea5f362ca36bc8dda7943bb33e216c1fd430b080428da0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.4.5"
   analyzer:
     dependency: transitive
     description:

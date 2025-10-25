@@ -62,10 +62,12 @@ android {
     }
 }
 dependencies {
-        // Firebase dependencies
+    // Firebase dependencies
     implementation(platform("com.google.firebase:firebase-bom:34.4.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-crashlytics-ndk")
+    // adjust_sdk dependency
+    implementation("com.google.android.gms:play-services-ads-identifier:18.1.0")
 }
 flutter {
     source = "../.."
