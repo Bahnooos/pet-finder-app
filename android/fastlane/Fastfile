@@ -6,7 +6,6 @@ platform :android do
   lane :firebase_distribution do
     sh "flutter clean"
     sh "flutter build apk --release --flavor production --target lib/main_production.dart --split-per-abi"
-    ENV["FASTLANE_EXECUTION_TIMEOUT"] = "1000"
     firebase_app_distribution(
             app: "1:847898941499:android:10fb6be5625e215b75641e",
             firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],

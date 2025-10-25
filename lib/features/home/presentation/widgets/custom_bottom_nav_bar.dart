@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pet_finder_app/core/helpers/extensions.dart';
@@ -41,10 +42,18 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       child: BottomNavigationBar(
         selectedItemColor: const Color(0xFF37BAA6),
         unselectedItemColor: Colors.grey,
-        onTap: (value) => setState(() {
+        onTap: (value) => setState(() async {
           context.pushNamed(screens[value]);
           if (value == 1) {
+            FirebaseAnalytics analytics = FirebaseAnalytics.instance;
             BlocProvider.of<FavoriteCubit>(context).emitFavoriteStates();
+            await analytics.logEvent(
+              name: 'button_pressed',
+              parameters: {
+                'button_name': 'start_game_button',
+                'screen': 'home_screen',
+              },
+            );
           }
           selectedItem = value;
         }),

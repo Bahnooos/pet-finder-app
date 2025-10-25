@@ -33,8 +33,7 @@ jobs:
           ruby-version: 3.3.3
           bundler-cache: true
           working-directory: android
-
-
+          
       - name: Build Android APK with Fastlane
         working-directory: android
         env:
