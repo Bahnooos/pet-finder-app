@@ -15,6 +15,7 @@ class _CategoriesSectionState extends State<CategoriesSection> {
   int selectedItem = 0;
   @override
   Widget build(BuildContext context) {
+
     final categories = ['All', 'Cats', 'Dogs', 'Birds', 'Fish', 'Reptiles'];
 
     return Column(
@@ -22,6 +23,7 @@ class _CategoriesSectionState extends State<CategoriesSection> {
       children: [
         Text(
           'Categories',
+          
           style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10.h),
