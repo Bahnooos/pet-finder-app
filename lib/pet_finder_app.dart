@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pet_finder_app/core/routing/app_router.dart';
@@ -9,6 +10,7 @@ class PetFinderApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAnalytics analytics = FirebaseAnalytics.instance;
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
@@ -17,7 +19,11 @@ class PetFinderApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: Routes.onbordingScreen,
         onGenerateRoute: appRouter.generateRoute,
+        navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: analytics),
+      ],
       ),
+
     );
   }
 }
