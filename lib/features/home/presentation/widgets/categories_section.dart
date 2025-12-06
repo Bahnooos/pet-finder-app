@@ -23,10 +23,10 @@ class _CategoriesSectionState extends State<CategoriesSection> {
       children: [
         Text(
           'Categories',
-          
+
           style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 10.h),
+      10.verticalSpace,
         SizedBox(
           height: 30.h,
           child: ListView.builder(
